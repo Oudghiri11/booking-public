@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -14,12 +15,13 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
       sx={{
         margin: 2,
         width: 250,
-        height: 320,
+        height: 370,
         borderRadius: 5,
         ":hover": {
           boxShadow: "10px 10px 20px #ccc",
         },
-      }}>
+      }}
+    >
       <img height={"50%"} width="100%" src={posterUrl} alt={title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -39,13 +41,15 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
             margin: "auto",
             bgcolor: "#2b2d42",
             ":hover": {
-              bgcolor: "#121217",
+              bgcolor: "#6b5b95",
             },
           }}
-          size="small">
+          size="small"
+        >
           Book
         </Button>
       </CardActions>
+      <Box sx={{ marginBottom: 20 }} />
     </Card>
   );
 };

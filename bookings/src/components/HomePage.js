@@ -35,8 +35,8 @@ const HomePage = () => {
         flexWrap="wrap"
         display="flex"
         justifyContent="center">
-        {[1,2,3,4].map((item) => (
-            <MovieItem   key={item}
+        { movies && movies.map((movie , index) => (
+            <MovieItem id={movie.id} title={movie.title} posterUrl={movie.posterUrl} releaseDate={movie.releaseDate} key={index}
             />
           ))}
       </Box>
