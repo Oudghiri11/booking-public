@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getAllMovies } from "../../api-helpers.js/api-helpers";
 import MovieItem from "./MovieItem";
@@ -22,6 +22,7 @@ const Movies = () => {
         color="white"
         textAlign={"center"}>
         All Movies
+        
       </Typography>
       <Box
         width={"100%"}
