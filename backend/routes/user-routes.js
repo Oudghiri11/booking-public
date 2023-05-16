@@ -9,6 +9,7 @@ import {
   updateUser,
 } from "../controllers/user-controller";
 
+
 const userRouter = express.Router();
 
 userRouter.get("/", getAllUsers);
