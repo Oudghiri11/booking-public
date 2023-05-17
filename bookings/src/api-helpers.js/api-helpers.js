@@ -173,7 +173,7 @@ export const addMovie = async (data) => {
       },
       {
         headers: {
-          Authorization: `bearer ${localStorage.getItem("tolen")}`,
+          Authorization: `bearer ${localStorage.getItem("token")}`,
         },
       }
     );

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, Checkbox, FormLabel, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { addMovie } from "../../api-helpers.js/api-helpers";
-import mongoose from "mongoose";
 
 const labelProps = {
   mt: 1,
@@ -19,28 +18,22 @@ const AddMovie = () => {
   });
   const [actors, setActors] = useState([]);
   const [actor, setActor] = useState("");
-  
+
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const adminId = localStorage.getItem("adminID");
-    console.log(adminId); // Check the value in the console
-  
-    if (mongoose.Types.ObjectId.isValid(adminId)) {
-      addMovie({ ...inputs, actors, admin: adminId })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    } else {
-      console.log("Invalid admin ID");
-    }
+    console.log(inputs, actors);
+    addMovie({ ...inputs, actors })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
