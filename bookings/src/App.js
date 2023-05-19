@@ -1,17 +1,16 @@
-import Admin from "./components/Admin/Admin";
-
-
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import Admin from "./components/Auth/Admin";
 import Auth from "./components/Auth/Auth";
+import Booking from "./components/Bookings/Booking";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
-import Movies from "./components/Movies/Movies";
-import { useEffect } from "react";
-import { adminActions, userActions } from "./store";
-import Booking from "./components/Bookings/Booking.js";
-import UserProfile from "./profile/UserProfile";
 import AddMovie from "./components/Movies/AddMovie";
+import Movies from "./components/Movies/Movies";
+import AdminProfile from "./profile/AdminProfile";
+import UserProfile from "./profile/UserProfile";
+import { adminActions, userActions } from "./store";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,16 +28,31 @@ function App() {
   return (
     <div>
       <Header />
-
       <section>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/Auth" element={<Auth />} />
-          <Route path="/Admin" element={<Admin />} />
-          <Route path="/Booking/:id" element={<Booking />} />
-          <Route path="/user" element={<UserProfile />} />
-          <Route path="/add" element={<AddMovie />} />
+          {!isUserLoggedIn && !isAdminLoggedIn && (
+            <>
+              {" "}
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/auth" element={<Auth />} />
+            </>
+          )}
+          {isUserLoggedIn && !isAdminLoggedIn && (
+            <>
+              {" "}
+              <Route path="/user" element={<UserProfile />} />
+              <Route path="/booking/:id" element={<Booking />} />
+            </>
+          )}
+          {isAdminLoggedIn && !isUserLoggedIn && (
+            <>
+              {" "}
+              <Route path="/add" element={<AddMovie />} />
+              <Route path="/user-admin" element={<AdminProfile />} />{" "}
+            </>
+          )}
         </Routes>
       </section>
     </div>

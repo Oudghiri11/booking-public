@@ -3,7 +3,6 @@ import { Box, Button, Typography } from "@mui/material";
 import MovieItem from "./Movies/MovieItem";
 import { Link } from "react-router-dom";
 import { getAllMovies } from "../api-helpers.js/api-helpers";
-import Movies from "./Movies/Movies";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -35,8 +34,14 @@ const HomePage = () => {
         flexWrap="wrap"
         display="flex"
         justifyContent="center">
-        { movies && movies.map((movie , index) => (
-            <MovieItem id={movie.id} title={movie.title} posterUrl={movie.posterUrl} releaseDate={movie.releaseDate} key={index}
+        {movies &&
+          movies.map((movie, index) => (
+            <MovieItem
+              id={movie._id}
+              title={movie.title}
+              posterUrl={movie.posterUrl}
+              releaseDate={movie.releaseDate}
+              key={index}
             />
           ))}
       </Box>

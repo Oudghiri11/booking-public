@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Autocomplete, Box, Tab, Tabs, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Autocomplete,
+  Box,
+  IconButton,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@mui/material";
 import MovieIcon from "@mui/icons-material/Movie";
 import { TextField } from "@mui/material";
 import { getAllMovies } from "../api-helpers.js/api-helpers";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { adminActions, userActions } from "../store";
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
   const isUserLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -18,19 +27,33 @@ const Header = () => {
       .then((data) => setMovies(data.movies))
       .catch((err) => console.log(err));
   }, []);
-  const logout = (isAdmin) =>{
+
+  const handleChange = (e, val) => {
+    const movie = movies.find((mov) => mov.title === val);
+    console.log(movie);
+    if (isUserLoggedIn && movie && movie._id) {
+      navigate(`/booking/${movie._id}`);
+    }
+  };
+  
+  const logout = (isAdmin) => {
     dispatch(isAdmin ? adminActions.logout() : userActions.logout());
-  }
+  };
+
   return (
     <AppBar position="sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
         <Box width={"20%"}>
-          <MovieIcon />
+          <IconButton component={Link} to="/">
+            <MovieIcon style={{ color: "white", fontSize: "30px" }} />
+          </IconButton>
         </Box>
+
         <Box width={"30%"} margin={"auto"}>
           <Autocomplete
+            onChange={handleChange}
             freeSolo
-            options={movies && movies.map((option) => option.title)}
+            options={movies.map((option) => option.title)}
             renderInput={(params) => (
               <TextField
                 sx={{
@@ -63,14 +86,24 @@ const Header = () => {
             {isUserLoggedIn && (
               <>
                 <Tab component={Link} to="/user" label="Profile" />
-                <Tab onClick={() => logout(false)} component={Link} to="/" label="Logout" />
+                <Tab
+                  onClick={() => logout(false)}
+                  component={Link}
+                  to="/"
+                  label="Logout"
+                />
               </>
             )}
             {isAdminLoggedIn && (
               <>
                 <Tab component={Link} to="/add" label="Add Movie" />
-                <Tab component={Link} to="/admin" label="Profile" />
-                <Tab onClick={() => logout(true)} component={Link} to="/" label="Logout" />
+                <Tab component={Link} to="/user-admin" label="Profile" />
+                <Tab
+                  onClick={() => logout(true)}
+                  component={Link}
+                  to="/"
+                  label="Logout"
+                />
               </>
             )}
           </Tabs>

@@ -4,14 +4,16 @@ import { sendUserAuthRequest } from "../../api-helpers.js/api-helpers";
 
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const onResReceived = (data) => {
     console.log( data);
     dispatch(userActions.login());
     localStorage.setItem("userId", data.id);
-    
+    navigate("/");
   };
 
   const getData = (data) => {

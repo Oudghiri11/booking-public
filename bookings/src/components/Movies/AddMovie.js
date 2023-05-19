@@ -8,6 +8,23 @@ const labelProps = {
   mb: 1,
 };
 
+const getYoutubeVideoId = (url) => {
+  try {
+    if (!url) {
+      return null;
+    }
+
+    const videoIdRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|youtu\.be\/|embed\/|.*[?&]list=)([^"&?\/ ]{11}))/;
+    const match = url.match(videoIdRegex);
+    return match ? match[1] : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+
+
+
 const AddMovie = () => {
   const [inputs, setInputs] = useState({
     title: "",
@@ -15,14 +32,25 @@ const AddMovie = () => {
     posterUrl: "",
     releaseDate: "",
     featured: false,
+    trailerUrl: "",
   });
   const [actors, setActors] = useState([]);
   const [actor, setActor] = useState("");
+  const [youtubeVideoId, setYoutubeVideoId] = useState(null);
 
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleTrailerUrlChange = (e) => {
+    const videoId = getYoutubeVideoId(e.target.value);
+    setYoutubeVideoId(videoId);
+    setInputs((prevState) => ({
+      ...prevState,
+      trailerUrl: e.target.value,
     }));
   };
 
@@ -71,6 +99,32 @@ const AddMovie = () => {
             variant="standard"
             margin="normal"
           />
+          <FormLabel sx={labelProps}>Trailer URL</FormLabel>
+          <TextField
+            value={inputs.trailerUrl}
+            onChange={handleTrailerUrlChange}
+            name="trailerUrl"
+            variant="standard"
+            margin="normal"
+          />
+          {youtubeVideoId && (
+            <Box
+              width="100%"
+              height={0}
+              paddingBottom="56.25%"
+              position="relative"
+              marginY={2}>
+              <iframe
+                title="Movie Trailer"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0 }}></iframe>
+            </Box>
+          )}
           <FormLabel sx={labelProps}>Release Date</FormLabel>
           <TextField
             type={"date"}

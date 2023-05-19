@@ -169,11 +169,13 @@ export const addMovie = async (data) => {
         posterUrl: data.posterUrl,
         featured: data.featured,
         actors: data.actors,
+        trailerUrl: data.trailerUrl,
+       
         admin: localStorage.getItem("adminID"),
       },
       {
         headers: {
-          Authorization: `bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -182,6 +184,33 @@ export const addMovie = async (data) => {
       throw new Error("Unexpected Error Occurred");
     }
 
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+
+export const getAdminById = async () => {
+  const adminId = localStorage.getItem("adminId");
+  const res = await axios
+    .get(`/admin/${adminId}`)
+    .catch((err) => console.log(err));
+
+  if (res.status !== 200) {
+    return console.log("Unexpected Error Occurred");
+  }
+
+  const resData = await res.data;
+  return resData;
+};
+export const deleteMovieById = async (movieId) => {
+  try {
+    const res = await axios.delete(`/movie/${movieId}`);
+    if (res.status !== 200) {
+      throw new Error("Unexpected Error Occurred");
+    }
     return res.data;
   } catch (err) {
     console.log(err);

@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -6,8 +8,6 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
 
 const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
   return (
@@ -22,7 +22,12 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
         },
       }}
     >
-      <img height={"50%"} width="100%" src={posterUrl} alt={title} />
+      <img
+        height={251.484}
+        width="100%"
+        src={posterUrl}
+        alt={title}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
@@ -35,7 +40,7 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
         <Button
           variant="contained"
           fullWidth
-          LinkComponent={Link}
+          component={Link} // Changed LinkComponent to component
           to={`/booking/${id}`}
           sx={{
             margin: "auto",
