@@ -85,6 +85,7 @@ const Header = () => {
             )}
             {isUserLoggedIn && (
               <>
+               <Tab component={Link} to="/stream" label="Streaming" />
                 <Tab component={Link} to="/user" label="Profile" />
                 <Tab
                   onClick={() => logout(false)}
@@ -92,6 +93,7 @@ const Header = () => {
                   to="/"
                   label="Logout"
                 />
+               
               </>
             )}
             {isAdminLoggedIn && (

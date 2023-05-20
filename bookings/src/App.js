@@ -10,6 +10,7 @@ import AddMovie from "./components/Movies/AddMovie";
 import Movies from "./components/Movies/Movies";
 import AdminProfile from "./profile/AdminProfile";
 import UserProfile from "./profile/UserProfile";
+import Streaming from "./Streaming/stream";
 import { adminActions, userActions } from "./store";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
               {" "}
               <Route path="/user" element={<UserProfile />} />
               <Route path="/booking/:id" element={<Booking />} />
+              <Route path="/stream" element={<Streaming />} />
             </>
           )}
           {isAdminLoggedIn && !isUserLoggedIn && (

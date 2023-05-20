@@ -14,11 +14,13 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
     <Card
       sx={{
         margin: 2,
-        width: 250,
-        height: 370,
-        borderRadius: 5,
+        width: 240,
+        height: "100%",
+        borderRadius: 10,
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+        transition: "box-shadow 0.3s",
         ":hover": {
-          boxShadow: "10px 10px 20px #ccc",
+          boxShadow: "0 6px 20px rgba(0, 0, 0, 0.3)",
         },
       }}
     >
@@ -27,34 +29,34 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
         width="100%"
         src={posterUrl}
         alt={title}
+        style={{ borderRadius: "10px 10px 0 0" }}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography variant="h6" component="div" fontWeight="bold" marginBottom={1}>
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {new Date(releaseDate).toDateString()}
+          Release Date: {new Date(releaseDate).toDateString()}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
           variant="contained"
           fullWidth
-          component={Link} // Changed LinkComponent to component
+          component={Link}
           to={`/booking/${id}`}
           sx={{
-            margin: "auto",
             bgcolor: "#2b2d42",
+            color: "#fff",
             ":hover": {
-              bgcolor: "#6b5b95",
+              bgcolor: "#3f3162",
             },
           }}
           size="small"
         >
-          Book
+          Book Now
         </Button>
       </CardActions>
-      <Box sx={{ marginBottom: 20 }} />
     </Card>
   );
 };

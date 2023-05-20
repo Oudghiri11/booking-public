@@ -15,16 +15,16 @@ const HomePage = () => {
 
   return (
     <Box width="100%" height="100vh" marginTop={2}>
-      <Box margin={"auto"} width="80%" height="30vh" padding={2}>
+      <Box margin="auto" width="80%" height="30vh" padding={2}>
         <img
-          src="https://static.cnews.fr/sites/default/files/eiffel_601296a5d5a3f.png"
+          src="https://regie-media.moncinepack.fr/assets/campagnes/encarts/01h038pnrq8k1t82911jsxg6bc/645bc9f626e24639564553.jpg"
           alt="Rocketry"
           width="100%"
           height="100%"
         />
       </Box>
       <Box padding={5} margin="auto">
-        <Typography variant="h4" textAlign={"center"}>
+        <Typography variant="h4" textAlign="center">
           Latest Releases
         </Typography>
       </Box>
@@ -33,7 +33,9 @@ const HomePage = () => {
         width="80%"
         flexWrap="wrap"
         display="flex"
-        justifyContent="center">
+        justifyContent="center"
+        margin="auto" // Added margin="auto" to center the movie cards
+      >
         {movies &&
           movies.map((movie, index) => (
             <MovieItem
@@ -45,16 +47,27 @@ const HomePage = () => {
             />
           ))}
       </Box>
-      <Box display={"flex"} padding={5} margin="auto">
+      <Box display="flex" padding={5} margin="auto">
         <Button
           LinkComponent={Link}
           to="/movies"
           variant="outlined"
-          sx={{ margin: "auto", color: "#2b2d42" }}>
+          sx={{
+            margin: "auto",
+            color: "#fff",
+            bgcolor: "#2b2d42",
+            border: "1px solid #2b2d42",
+            ":hover": {
+              bgcolor: "#2b2d42",
+              color: "#fff",
+            },
+          }}
+        >
           View All Movies
         </Button>
       </Box>
     </Box>
   );
 };
+
 export default HomePage;

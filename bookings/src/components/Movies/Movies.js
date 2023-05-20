@@ -4,7 +4,7 @@ import { getAllMovies } from "../../api-helpers.js/api-helpers";
 import MovieItem from "./MovieItem";
 
 const Movies = () => {
-                          const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState();
   useEffect(() => {
     getAllMovies()
       .then((data) => setMovies(data.movies))
@@ -12,25 +12,24 @@ const Movies = () => {
   }, []);
   
   return (
-    <Box margin={"auto"} marginTop={4}>
+    <Box margin="auto" marginTop={4} display="flex" flexDirection="column" alignItems="center">
       <Typography
-        margin={"auto"}
         variant="h4"
         padding={2}
         width="40%"
-        bgcolor={"#900C3F"}
+        bgcolor="#900C3F"
         color="white"
-        textAlign={"center"}>
+        textAlign="center"
+        marginBottom={5}
+      >
         All Movies
-        
       </Typography>
       <Box
-        width={"100%"}
+        width="100%"
         margin="auto"
-        marginTop={5}
-        display={"flex"}
-        justifyContent="flex-start"
-        flexWrap={"wrap"}
+        display="flex"
+        justifyContent="center"
+        flexWrap="wrap"
       >
         {movies &&
           movies.map((movie, index) => (

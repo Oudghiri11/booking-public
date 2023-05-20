@@ -59,42 +59,77 @@ const Booking = () => {
             fontWeight="bold"
             color="#3f3162"
             textAlign="center"
+            marginBottom={3}
           >
             Book Tickets Of Movie: {movie.title}
           </Typography>
           <Box display="flex" justifyContent="center">
-            <Box
-              display="flex"
-              flexDirection="column"
-              paddingTop={3}
-              width="50%"
-              marginRight="auto"
-            >
-              <img
-                width="251.484px"
-                height="300px"
-                src={movie.posterUrl}
-                alt={movie.title}
-              />
-              <Box width="80%" marginTop={3} padding={2}>
-                <Typography color="#3f3162">{movie.description}</Typography>
-                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Actors:
-                  {movie.actors.map((actor) => " " + actor + " ")}
+            <Box width="50%" marginRight={3}>
+              {movie.posterUrl && (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  marginTop={3}
+                  marginBottom={2}
+                >
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{ width: "40%", height: "auto", borderRadius: "10px" }}
+                  />
+                </Box>
+              )}
+              <Box
+                display="flex"
+                flexDirection="column"
+                padding={2}
+                bgcolor="#f8f8f8"
+                boxShadow="0 2px 10px rgba(0, 0, 0, 0.2)"
+                borderRadius={4}
+              >
+                <Typography color="#3f3162" fontWeight="bold" marginBottom={1}>
+                  Description:
+                </Typography>
+                <Typography color="#3f3162" marginBottom={1} fontWeight="bold">
+                  {movie.description}
                 </Typography>
                 <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Release Date:{" "}
-                  {new Date(movie.releaseDate).toDateString()}
+                  Actors: {movie.actors.join(", ")}
+                </Typography>
+                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
+                  Release Date: {new Date(movie.releaseDate).toDateString()}
                 </Typography>
               </Box>
+              {movie.trailerUrl && (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  marginTop={3}
+                >
+                  <iframe
+                    width="800"
+                    height="450"
+                    src={`https://www.youtube.com/embed/${getYoutubeVideoId(
+                      movie.trailerUrl
+                    )}`}
+                    title="Movie Trailer"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Box>
+              )}
             </Box>
-            <Box width="50%" paddingTop={3}>
+            <Box width="50%" marginLeft={3}>
               <form onSubmit={handleSubmit}>
                 <Box
                   padding={5}
                   margin="auto"
                   display="flex"
                   flexDirection="column"
+                  bgcolor="#f8f8f8"
+                  boxShadow="0 2px 10px rgba(0, 0, 0, 0.2)"
+                  borderRadius={4}
                 >
                   <FormLabel>Seat Number</FormLabel>
                   <TextField
@@ -124,12 +159,14 @@ const Booking = () => {
                     fullWidth
                     sx={{
                       margin: "auto",
-                      bgcolor: "#3f3162",
+                      bgcolor: "#6b5b95",
+                      color: "#fff",
                       ":hover": {
-                        bgcolor: "#6b5b95",
+                        bgcolor: "#3f3162",
                       },
                     }}
                     size="large"
+                    marginTop={3}
                   >
                     Book
                   </Button>
@@ -137,21 +174,6 @@ const Booking = () => {
               </form>
             </Box>
           </Box>
-          {movie.trailerUrl && (
-            <Box display="flex" justifyContent="center" marginTop={3}>
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${getYoutubeVideoId(
-                  movie.trailerUrl
-                )}`}
-                title="Movie Trailer"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </Box>
-          )}
         </Fragment>
       )}
     </div>
