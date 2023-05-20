@@ -12,7 +12,7 @@ const Movies = () => {
   }, []);
   
   return (
-    <Box margin="auto" marginTop={4} display="flex" flexDirection="column" alignItems="center">
+    <Box margin="auto" marginTop={4} display="flex" flexDirection="column" alignItems="center" >
       <Typography
         variant="h4"
         padding={2}

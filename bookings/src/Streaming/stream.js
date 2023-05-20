@@ -3,6 +3,9 @@ import axios from "axios";
 import MovieCard from "../components/MovieCard";
 import "./stream.css";
 import Youtube from "react-youtube";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Stream = () => {
   const API_BASE_URL = "https://api.themoviedb.org/3";
@@ -12,6 +15,13 @@ const Stream = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [showTrailer, setShowTrailer] = useState(false);
+  const [genres, setGenres] = useState([
+    { id: 99, name: "Currently on Cinema" },
+    { id: 28, name: "Action" },
+    { id: 12, name: "Adventure" },
+    { id: 80, name: "Crime" },
+    { id: 10749, name: "Romance" },
+  ]);
 
   const fetchMovies = async (searchKey) => {
     try {
@@ -40,6 +50,20 @@ const Stream = () => {
     return data;
   };
 
+  const fetchMoviesByGenre = async (genreId) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/discover/movie`, {
+        params: {
+          api_key: API_KEY,
+          with_genres: genreId,
+        },
+      });
+      return response.data.results;
+    } catch (error) {
+      console.log(`Error fetching ${genreId} movies:`, error);
+    }
+  };
+
   const selectMovie = async (movie) => {
     const data = await fetchMovie(movie.id);
     setSelectedMovie(data);
@@ -50,10 +74,36 @@ const Stream = () => {
     fetchMovies(searchKey);
   }, [searchKey]);
 
-  const renderMovies = () =>
-    movies.map((movie) => (
-      <MovieCard key={movie.id} movie={movie} selectMovie={selectMovie} />
-    ));
+  useEffect(() => {
+    const fetchMoviesByGenres = async () => {
+      const genreMoviesPromises = genres.map(async (genre) => {
+        const genreMovies = await fetchMoviesByGenre(genre.id);
+        return {
+          genreId: genre.id,
+          genreName: genre.name,
+          movies: genreMovies,
+        };
+      });
+      const genreMoviesData = await Promise.all(genreMoviesPromises);
+      setGenres(genreMoviesData);
+    };
+
+    fetchMoviesByGenres();
+  }, []);
+
+  const renderMovies = (movies) => {
+    if (!movies) {
+      return null;
+    }
+
+    return (
+      <Slider slidesToShow={5} slidesToScroll={1}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} selectMovie={selectMovie} />
+        ))}
+      </Slider>
+    );
+  };
 
   const searchMovies = (e) => {
     e.preventDefault();
@@ -86,8 +136,7 @@ const Stream = () => {
           backgroundImage: selectedMovie.backdrop_path
             ? `url(${IMAGE_BASE_URL}${selectedMovie.backdrop_path})`
             : "none",
-        }}
-      >
+        }}>
         {selectedMovie && (
           <div className="hero-content max-center">
             {!showTrailer && (
@@ -102,17 +151,21 @@ const Stream = () => {
               </>
             )}
             {showTrailer &&
-              selectedMovie.videos &&
-              selectedMovie.videos.results.length > 0 && (
-                <Youtube
-                  videoId={selectedMovie.videos.results[0].key}
-                  opts={{ width: "100%", height: "100%" }}
-                />
-              )}
+            selectedMovie.videos &&
+            selectedMovie.videos.results.length > 0 ? (
+              <Youtube videoId={selectedMovie.videos.results[0].key} />
+            ) : null}
           </div>
         )}
       </div>
-      <div className="container max-center">{renderMovies()}</div>
+      <div className="slider-container max-center">
+        {genres.map((genre) => (
+          <React.Fragment key={genre.genreId}>
+            <h2 className="title">{genre.genreName} Movies</h2>
+            {renderMovies(genre.movies)}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };
