@@ -33,7 +33,11 @@ const Stream = () => {
         },
       });
 
-      setSelectedMovie(response.data.results[0]);
+      const movieId = response.data.results[0].id;
+      const movieData = await fetchMovie(movieId);
+      const movieVideos = await fetchVideos(movieId);
+
+      setSelectedMovie({ ...movieData, videos: movieVideos });
       setMovies(response.data.results);
     } catch (error) {
       console.log("Error fetching movies:", error);
@@ -44,10 +48,18 @@ const Stream = () => {
     const { data } = await axios.get(`${API_BASE_URL}/movie/${id}`, {
       params: {
         api_key: API_KEY,
-        append_to_response: "videos",
       },
     });
     return data;
+  };
+
+  const fetchVideos = async (id) => {
+    const { data } = await axios.get(`${API_BASE_URL}/movie/${id}/videos`, {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+    return data.results;
   };
 
   const fetchMoviesByGenre = async (genreId) => {
@@ -66,7 +78,8 @@ const Stream = () => {
 
   const selectMovie = async (movie) => {
     const data = await fetchMovie(movie.id);
-    setSelectedMovie(data);
+    const videos = await fetchVideos(movie.id);
+    setSelectedMovie({ ...data, videos });
     setShowTrailer(false); // Reset showTrailer state when a new movie is selected
   };
 
@@ -111,7 +124,7 @@ const Stream = () => {
   };
 
   const handleTrailerClick = () => {
-    setShowTrailer(!showTrailer);
+    setShowTrailer((prevState) => !prevState);
   };
 
   return (
@@ -152,8 +165,9 @@ const Stream = () => {
             )}
             {showTrailer &&
             selectedMovie.videos &&
-            selectedMovie.videos.results.length > 0 ? (
-              <Youtube videoId={selectedMovie.videos.results[0].key} />
+            selectedMovie.videos.length > 0 &&
+            selectedMovie.videos[0].key ? (
+              <Youtube videoId={selectedMovie.videos[0].key} />
             ) : null}
           </div>
         )}

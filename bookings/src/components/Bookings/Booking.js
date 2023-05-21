@@ -61,69 +61,13 @@ const Booking = () => {
             textAlign="center"
             marginBottom={3}
           >
-            Book Tickets Of Movie: {movie.title}
+            Book Tickets for Movie: {movie.title}
           </Typography>
           <Box display="flex" justifyContent="center">
-            <Box width="50%" marginRight={3}>
-              {movie.posterUrl && (
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  marginTop={3}
-                  marginBottom={2}
-                >
-                  <img
-                    src={movie.posterUrl}
-                    alt={movie.title}
-                    style={{ width: "40%", height: "auto", borderRadius: "10px" }}
-                  />
-                </Box>
-              )}
-              <Box
-                display="flex"
-                flexDirection="column"
-                padding={2}
-                bgcolor="#f8f8f8"
-                boxShadow="0 2px 10px rgba(0, 0, 0, 0.2)"
-                borderRadius={4}
-              >
-                <Typography color="#3f3162" fontWeight="bold" marginBottom={1}>
-                  Description:
-                </Typography>
-                <Typography color="#3f3162" marginBottom={1} fontWeight="bold">
-                  {movie.description}
-                </Typography>
-                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Actors: {movie.actors.join(", ")}
-                </Typography>
-                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Release Date: {new Date(movie.releaseDate).toDateString()}
-                </Typography>
-              </Box>
-              {movie.trailerUrl && (
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  marginTop={3}
-                >
-                  <iframe
-                    width="800"
-                    height="450"
-                    src={`https://www.youtube.com/embed/${getYoutubeVideoId(
-                      movie.trailerUrl
-                    )}`}
-                    title="Movie Trailer"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </Box>
-              )}
-            </Box>
-            <Box width="50%" marginLeft={3}>
+            <Box width="60%" maxWidth="800px" marginRight={3}>
               <form onSubmit={handleSubmit}>
                 <Box
-                  padding={5}
+                  padding={3}
                   margin="auto"
                   display="flex"
                   flexDirection="column"
@@ -138,14 +82,14 @@ const Booking = () => {
                     onChange={handleChange}
                     type="number"
                     margin="normal"
-                    variant="standard"
+                    variant="outlined"
                   />
                   <FormLabel>Booking Date</FormLabel>
                   <TextField
                     name="date"
                     type="date"
                     margin="normal"
-                    variant="standard"
+                    variant="outlined"
                     value={inputs.date}
                     onChange={handleChange}
                     InputLabelProps={{
@@ -172,6 +116,61 @@ const Booking = () => {
                   </Button>
                 </Box>
               </form>
+              {movie.trailerUrl && (
+                <Box display="flex" justifyContent="center" marginTop={3}>
+                  <iframe
+                    width="100%"
+                    height="500"
+                    src={`https://www.youtube.com/embed/${getYoutubeVideoId(
+                      movie.trailerUrl
+                    )}`}
+                    title="Movie Trailer"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Box>
+              )}
+            </Box>
+            <Box width="40%">
+              {movie.posterUrl && (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  marginTop={3}
+                  marginBottom={2}
+                  marginRight={3}
+                  maxWidth="300px"
+                >
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "10px" }}
+                  />
+                </Box>
+              )}
+              <Box
+                display="flex"
+                flexDirection="column"
+                padding={2}
+                bgcolor="#f8f8f8"
+                boxShadow="0 2px 10px rgba(0, 0, 0, 0.2)"
+                borderRadius={4}
+              >
+                <Typography color="#3f3162" fontWeight="bold" marginBottom={1}>
+                  Description:
+                </Typography>
+                <Typography color="#3f3162" marginBottom={1}>
+                  {movie.description}
+                </Typography>
+                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
+                  Actors: {movie.actors.join(", ")}
+                </Typography>
+                <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
+                  Release Date: {new Date(movie.releaseDate).toDateString()}
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Fragment>

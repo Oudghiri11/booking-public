@@ -6,6 +6,7 @@ import { getAllMovies } from "../api-helpers.js/api-helpers";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const maxMoviesToShow = 4;
 
   useEffect(() => {
     getAllMovies()
@@ -34,10 +35,10 @@ const HomePage = () => {
         flexWrap="wrap"
         display="flex"
         justifyContent="center"
-        margin="auto" // Added margin="auto" to center the movie cards
+        margin="auto"
       >
         {movies &&
-          movies.map((movie, index) => (
+          movies.slice(0, maxMoviesToShow).map((movie, index) => (
             <MovieItem
               id={movie._id}
               title={movie.title}

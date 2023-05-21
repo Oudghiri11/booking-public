@@ -54,7 +54,7 @@
                         /* Hero */
                         .hero {
                           position: relative;
-                          height: 400px;
+                          height: 600px;
                           background-position: center;
                           background-repeat: no-repeat;
                           background-size: cover;
@@ -188,28 +188,35 @@
                           transition: box-shadow 0.3s;
                           color: #ffffff; /* Set text color to white */
                         }
-                        
+                        .movie-card:hover {
+                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        }
                         .movie-card .movie-info {
                           padding: 10px;
-                          background-color: #ffffff; /* Set background color of the white part */
+                          background-color: rgba(0, 0, 0, 0.8); /* Set background color of the overlay */
+                          opacity: 0;
+                          transition: opacity 0.3s;
                         }
                         
                         .movie-card .movie-title {
                           font-size: 16px;
                           font-weight: bold;
                           margin: 8px 0;
-                          color: #000000; /* Set text color of the title to black */
+                          color: #ffffff; /* Set text color of the title to white */
                         }
                         
                         .movie-card .movie-overview {
                           font-size: 14px;
                           margin-bottom: 8px;
-                          color: #000000; /* Set text color of the overview to black */
+                          color: #ffffff; /* Set text color of the overview to white */
                         }
                         
                         .movie-card .movie-release-date {
                           font-size: 12px;
                           color: #ffffff;
+                        }
+                        .movie-card:hover .movie-info {
+                          opacity: 1;
                         }
                         
                         /* Movie Genres */
