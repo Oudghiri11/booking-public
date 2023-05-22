@@ -5,6 +5,8 @@ import userRouter from "./routes/user-routes";
 import adminRouter from "./routes/admin-routes";
 import movieRouter from "./routes/movie-routes";
 import bookingsRouter from "./routes/booking-routes";
+
+
 import cors from "cors";
 dotenv.config();
 const app = express();
@@ -16,6 +18,7 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/movie", movieRouter);
 app.use("/booking", bookingsRouter);
+
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
