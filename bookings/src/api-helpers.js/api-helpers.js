@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllMovies = async () => {
   const res = await axios
-    .get("http://localhost:5000/movie")
+    .get("https://booking-public-three.vercel.app/movie")
     .catch((err) => console.log(err));
   if (res.status !== 200) {
     return console.log("No Data");
@@ -12,7 +12,7 @@ export const getAllMovies = async () => {
 };
 export const sendUserAuthRequest = async (data, signup) => {
   const res = await axios
-    .post(`/user/${signup ? "signup" : "login"}`, {
+    .post(`https://booking-public-three.vercel.app/user/${signup ? "signup" : "login"}`, {
       name: signup ? data.name : "",
       email: data.email,
       password: data.password,
@@ -29,7 +29,7 @@ export const sendUserAuthRequest = async (data, signup) => {
 
 export const sendAdminAuthRequest = async (data) => {
   const res = await axios
-    .post("/admin/login", {
+    .post("https://booking-public-three.vercel.app/admin/login", {
       email: data.email,
       password: data.password,
     })
@@ -43,7 +43,7 @@ export const sendAdminAuthRequest = async (data) => {
   return resData;
 };
 export const getMovieDetails = async (id) => {
-  const res = await axios.get(`/movie/${id}`).catch((err) => console.log(err));
+  const res = await axios.get(`https://booking-public-three.vercel.app/movie/${id}`).catch((err) => console.log(err));
   if (res.status !== 200) {
     return console.log("Unexpected Error");
   }
@@ -53,7 +53,7 @@ export const getMovieDetails = async (id) => {
 
 export const newBooking = async (data) => {
   const res = await axios
-    .post("/booking", {
+    .post("https://booking-public-three.vercel.app/booking", {
       movie: data.movie,
       seatNumber: data.seatNumber,
       date: data.date,
@@ -70,7 +70,7 @@ export const newBooking = async (data) => {
 export const getUserBooking = async () => {
   const id = localStorage.getItem("userId");
   const res = await axios
-    .get(`/user/bookings/${id}`)
+    .get(`https://booking-public-three.vercel.app/user/bookings/${id}`)
     .catch((err) => console.log(err));
 
   if (res.status !== 200) {
@@ -82,7 +82,7 @@ export const getUserBooking = async () => {
 
 export const deleteBooking = async (id) => {
   const res = await axios
-    .delete(`/booking/${id}`)
+    .delete(`https://booking-public-three.vercel.app/booking/${id}`)
     .catch((err) => console.log(err));
 
   if (res.status !== 200) {
@@ -95,7 +95,7 @@ export const deleteBooking = async (id) => {
 
 export const getUserDetails = async () => {
   const id = localStorage.getItem("userId");
-  const res = await axios.get(`/user/${id}`).catch((err) => console.log(err));
+  const res = await axios.get(`https://booking-public-three.vercel.app/user/${id}`).catch((err) => console.log(err));
   if (res.status !== 200) {
     return console.log("Unexpected Error");
   }
@@ -161,7 +161,7 @@ export const getUserDetails = async () => {
 export const addMovie = async (data) => {
   try {
     const res = await axios.post(
-      "/movie",
+      "https://booking-public-three.vercel.app/movie",
       {
         title: data.title,
         description: data.description,
@@ -195,7 +195,7 @@ export const addMovie = async (data) => {
 export const getAdminById = async () => {
   const adminId = localStorage.getItem("adminId");
   const res = await axios
-    .get(`/admin/${adminId}`)
+    .get(`https://booking-public-three.vercel.app/admin/${adminId}`)
     .catch((err) => console.log(err));
 
   if (res.status !== 200) {
@@ -207,7 +207,7 @@ export const getAdminById = async () => {
 };
 export const deleteMovieById = async (movieId) => {
   try {
-    const res = await axios.delete(`/movie/${movieId}`);
+    const res = await axios.delete(`https://booking-public-three.vercel.app/movie/${movieId}`);
     if (res.status !== 200) {
       throw new Error("Unexpected Error Occurred");
     }
