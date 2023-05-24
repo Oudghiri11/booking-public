@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import Booking from "../models/Booking";
-import Movie from "../models/movie";
-import User from "../models/User";
+import Booking from "../models/Booking.mjs";
+import Movie from "../models/Movie.mjs";
+import User from "../models/User.mjs";
 
 export const newBooking = async (req, res, next) => {
   const { movie, date, seatNumber, user } = req.body;
@@ -49,20 +49,20 @@ export const newBooking = async (req, res, next) => {
 };
 export const getBookingById = async (req, res, next) => {
   const id = req.params.id;
-  
+
   let booking;
-  
+
   try {
     booking = await Booking.findById(id);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Unexpected Error" });
   }
-  
+
   if (!booking) {
     return res.status(404).json({ message: "Booking not found" });
   }
-  
+
   return res.status(200).json({ booking });
 };
 

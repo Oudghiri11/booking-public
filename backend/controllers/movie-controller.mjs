@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import Admin from "../models/admin";
-import Movie from "../models/movie";
+import Admin from "../models/Admin.mjs";
+import Movie from "../models/Movie.mjs";
 
 export const addMovie = async (req, res, next) => {
   const extractedToken = req.headers.authorization.split(" ")[1];
@@ -22,8 +22,15 @@ export const addMovie = async (req, res, next) => {
   });
 
   // create new movie
-  const { title, description, releaseDate, posterUrl, featured, actors, trailerUrl } =
-    req.body;
+  const {
+    title,
+    description,
+    releaseDate,
+    posterUrl,
+    featured,
+    actors,
+    trailerUrl,
+  } = req.body;
   if (
     !title ||
     title.trim() === "" ||
