@@ -43,11 +43,11 @@ const Header = () => {
   return (
     <AppBar position="sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
-        <Box width={"20%"}>
-          <IconButton component={Link} to="/">
-            <MovieIcon style={{ color: "white", fontSize: "30px" }} />
-          </IconButton>
-        </Box>
+      <Box width={"20%"}>
+  <IconButton component={Link} to="/">
+    <img src="https://static.thenounproject.com/png/4068872-200.png" alt="Custom Icon" style={{ width: "40px", height: "40px", filter: "invert(10000%)" }} />
+  </IconButton>
+</Box>
 
         <Box width={"30%"} margin={"auto"}>
           <Autocomplete
