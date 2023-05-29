@@ -36,7 +36,7 @@ const AuthForm = ({ onSubmit, isAdmin }) => {
         </IconButton>
       </Box>
       <Typography variant="h4" textAlign={"center"}>
-        {isSignup ? "Signup" : "Login"}
+        {isSignup ? "Inscription" : "Connexion"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box
@@ -50,7 +50,7 @@ const AuthForm = ({ onSubmit, isAdmin }) => {
           {!isAdmin && isSignup && (
             <>
               {" "}
-              <FormLabel sx={labelStyle}>Name</FormLabel>
+              <FormLabel sx={labelStyle}>Nom</FormLabel>
               <TextField
                 value={inputs.name}
                 onChange={handleChange}
@@ -70,7 +70,7 @@ const AuthForm = ({ onSubmit, isAdmin }) => {
             type={"email"}
             name="email"
           />
-          <FormLabel sx={labelStyle}>Password</FormLabel>
+          <FormLabel sx={labelStyle}>Mot de Passe</FormLabel>
           <TextField
             value={inputs.password}
             onChange={handleChange}
@@ -84,14 +84,14 @@ const AuthForm = ({ onSubmit, isAdmin }) => {
             type="submit"
             fullWidth
             variant="contained">
-            {isSignup ? "Signup" : "Login"}
+            {isSignup ? "Inscription" : "Connexion"}
           </Button>
           {!isAdmin && (
             <Button
               onClick={() => setIsSignup(!isSignup)}
               sx={{ mt: 2, borderRadius: 10 }}
               fullWidth>
-              Switch To {isSignup ? "Login" : "Signup"}
+              {isSignup ? " allez vers la onnexion ?" : "Allez vers l'inscription ?"}
             </Button>
           )}
         </Box>

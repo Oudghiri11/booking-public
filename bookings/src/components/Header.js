@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  AppBar,
-  Autocomplete,
-  Box,
-  IconButton,
-  Tab,
-  Tabs,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Autocomplete, Box, IconButton, Tab, Tabs, Toolbar } from "@mui/material";
 import MovieIcon from "@mui/icons-material/Movie";
 import { TextField } from "@mui/material";
 import { getAllMovies } from "../api-helpers.js/api-helpers";
@@ -35,7 +27,7 @@ const Header = () => {
       navigate(`/booking/${movie._id}`);
     }
   };
-  
+
   const logout = (isAdmin) => {
     dispatch(isAdmin ? adminActions.logout() : userActions.logout());
   };
@@ -43,11 +35,15 @@ const Header = () => {
   return (
     <AppBar position="sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
-      <Box width={"20%"}>
-  <IconButton component={Link} to="/">
-    <img src="https://static.thenounproject.com/png/4068872-200.png" alt="Custom Icon" style={{ width: "40px", height: "40px", filter: "invert(10000%)" }} />
-  </IconButton>
-</Box>
+        <Box width={"20%"}>
+          <IconButton component={Link} to="/">
+            <img
+              src="https://static.thenounproject.com/png/4068872-200.png"
+              alt="Custom Icon"
+              style={{ width: "40px", height: "40px", filter: "invert(10000%)" }}
+            />
+          </IconButton>
+        </Box>
 
         <Box width={"30%"} margin={"auto"}>
           <Autocomplete
@@ -64,7 +60,7 @@ const Header = () => {
                 }}
                 variant="standard"
                 {...params}
-                placeholder="Search Across Movies"
+                placeholder="Rechercher des films"
               />
             )}
           />
@@ -76,36 +72,25 @@ const Header = () => {
             value={value}
             onChange={(e, val) => setValue(val)}
           >
-            <Tab component={Link} to="/movies" label="Movies" />
+            <Tab component={Link} to="/movies" label="Cinéma" />
             {!isAdminLoggedIn && !isUserLoggedIn && (
               <>
                 <Tab component={Link} to="/admin" label="Admin" />
-                <Tab component={Link} to="/auth" label="Auth" />
+                <Tab component={Link} to="/auth" label="Connexion" />
               </>
             )}
             {isUserLoggedIn && (
               <>
-               <Tab component={Link} to="/stream" label="Streaming" />
-                <Tab component={Link} to="/user" label="Profile" />
-                <Tab
-                  onClick={() => logout(false)}
-                  component={Link}
-                  to="/"
-                  label="Logout"
-                />
-               
+                <Tab component={Link} to="/stream" label="Streaming" />
+                <Tab component={Link} to="/user" label="Profil" />
+                <Tab onClick={() => logout(false)} component={Link} to="/" label="Déconnexion" />
               </>
             )}
             {isAdminLoggedIn && (
               <>
-                <Tab component={Link} to="/add" label="Add Movie" />
-                <Tab component={Link} to="/user-admin" label="Profile" />
-                <Tab
-                  onClick={() => logout(true)}
-                  component={Link}
-                  to="/"
-                  label="Logout"
-                />
+                <Tab component={Link} to="/add" label="Ajouter un film" />
+                <Tab component={Link} to="/user-admin" label="Profil" />
+                <Tab onClick={() => logout(true)} component={Link} to="/" label="Déconnexion" />
               </>
             )}
           </Tabs>
