@@ -26,7 +26,7 @@ const HomePage = () => {
       </Box>
       <Box padding={5} margin="auto">
         <Typography variant="h4" textAlign="center">
-          Latest Releases
+          A l'affiche au cinéma
         </Typography>
       </Box>
       <Box
@@ -35,18 +35,19 @@ const HomePage = () => {
         flexWrap="wrap"
         display="flex"
         justifyContent="center"
-        margin="auto"
-      >
+        margin="auto">
         {movies &&
-          movies.slice(0, maxMoviesToShow).map((movie, index) => (
-            <MovieItem
-              id={movie._id}
-              title={movie.title}
-              posterUrl={movie.posterUrl}
-              releaseDate={movie.releaseDate}
-              key={index}
-            />
-          ))}
+          movies
+            .slice(0, maxMoviesToShow)
+            .map((movie, index) => (
+              <MovieItem
+                id={movie._id}
+                title={movie.title}
+                posterUrl={movie.posterUrl}
+                releaseDate={movie.releaseDate}
+                key={index}
+              />
+            ))}
       </Box>
       <Box display="flex" padding={5} margin="auto">
         <Button
@@ -62,8 +63,7 @@ const HomePage = () => {
               bgcolor: "#2b2d42",
               color: "#fff",
             },
-          }}
-        >
+          }}>
           Afficher tous les films
         </Button>
       </Box>
