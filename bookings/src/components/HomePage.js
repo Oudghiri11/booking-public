@@ -64,7 +64,7 @@ const HomePage = () => {
             },
           }}
         >
-          View All Movies
+          Afficher tous les films
         </Button>
       </Box>
     </Box>
