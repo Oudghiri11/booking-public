@@ -61,7 +61,7 @@ const Booking = () => {
             textAlign="center"
             marginBottom={3}
           >
-            Book Tickets for Movie: {movie.title}
+            Réserver une place pour : {movie.title}
           </Typography>
           <Box display="flex" justifyContent="center">
             <Box width="60%" maxWidth="800px" marginRight={3}>
@@ -75,7 +75,7 @@ const Booking = () => {
                   boxShadow="0 2px 10px rgba(0, 0, 0, 0.2)"
                   borderRadius={4}
                 >
-                  <FormLabel>Seat Number</FormLabel>
+                  <FormLabel>Numéro de place</FormLabel>
                   <TextField
                     name="seatNumber"
                     value={inputs.seatNumber}
@@ -84,7 +84,7 @@ const Booking = () => {
                     margin="normal"
                     variant="outlined"
                   />
-                  <FormLabel>Booking Date</FormLabel>
+                  <FormLabel>Date</FormLabel>
                   <TextField
                     name="date"
                     type="date"
@@ -112,7 +112,7 @@ const Booking = () => {
                     size="large"
                     marginTop={3}
                   >
-                    Book
+                   Réserver
                   </Button>
                 </Box>
               </form>
@@ -165,10 +165,10 @@ const Booking = () => {
                   {movie.description}
                 </Typography>
                 <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Actors: {movie.actors.join(", ")}
+                  Acteurs: {movie.actors.join(", ")}
                 </Typography>
                 <Typography color="#3f3162" fontWeight="bold" marginTop={1}>
-                  Release Date: {new Date(movie.releaseDate).toDateString()}
+                  Date de sortie {new Date(movie.releaseDate).toDateString()}
                 </Typography>
               </Box>
             </Box>
