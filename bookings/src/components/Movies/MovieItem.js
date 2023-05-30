@@ -10,6 +10,12 @@ import {
 } from "@mui/material";
 
 const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
+  const frenchDate = new Date(releaseDate).toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <Card
       sx={{
@@ -36,7 +42,7 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Release Date: {new Date(releaseDate).toDateString()}
+          Date de sortie : {frenchDate}
         </Typography>
       </CardContent>
       <CardActions>
@@ -54,7 +60,7 @@ const MovieItem = ({ title, releaseDate, posterUrl, id }) => {
           }}
           size="small"
         >
-          Book Now
+          Réserver
         </Button>
       </CardActions>
     </Card>
