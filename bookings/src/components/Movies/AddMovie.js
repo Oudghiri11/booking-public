@@ -73,9 +73,9 @@ const AddMovie = () => {
           flexDirection="column"
           boxShadow={"10px 10px 20px #ccc"}>
           <Typography textAlign={"center"} variant="h5" fontFamily={"verdana"}>
-            Add New Movie
+            Ajouer un nouveau film
           </Typography>
-          <FormLabel sx={labelProps}>Title</FormLabel>
+          <FormLabel sx={labelProps}>Titre</FormLabel>
           <TextField
             value={inputs.title}
             onChange={handleChange}
@@ -91,7 +91,7 @@ const AddMovie = () => {
             variant="standard"
             margin="normal"
           />
-          <FormLabel sx={labelProps}>Poster URL</FormLabel>
+          <FormLabel sx={labelProps}>Affiche du film</FormLabel>
           <TextField
             value={inputs.posterUrl}
             onChange={handleChange}
@@ -99,7 +99,7 @@ const AddMovie = () => {
             variant="standard"
             margin="normal"
           />
-          <FormLabel sx={labelProps}>Trailer URL</FormLabel>
+          <FormLabel sx={labelProps}>Bande Annonce</FormLabel>
           <TextField
             value={inputs.trailerUrl}
             onChange={handleTrailerUrlChange}
@@ -125,7 +125,7 @@ const AddMovie = () => {
                 style={{ position: "absolute", top: 0, left: 0 }}></iframe>
             </Box>
           )}
-          <FormLabel sx={labelProps}>Release Date</FormLabel>
+          <FormLabel sx={labelProps}>Date de sortie</FormLabel>
           <TextField
             type={"date"}
             value={inputs.releaseDate}
@@ -134,7 +134,7 @@ const AddMovie = () => {
             variant="standard"
             margin="normal"
           />
-          <FormLabel sx={labelProps}>Actor</FormLabel>
+          <FormLabel sx={labelProps}>Acteurs</FormLabel>
           <Box display={"flex"}>
             <TextField
               value={actor}
@@ -148,10 +148,10 @@ const AddMovie = () => {
                 setActors([...actors, actor]);
                 setActor("");
               }}>
-              Add
+             Ajouter
             </Button>
           </Box>
-          <FormLabel sx={labelProps}>Featured</FormLabel>
+          <FormLabel sx={labelProps}>Mise en Avant</FormLabel>
           <Checkbox
             name="featured"
             checked={inputs.featured}
@@ -175,7 +175,7 @@ const AddMovie = () => {
                 bgcolor: "#121217",
               },
             }}>
-            Add New Movie
+            Ajouter le film
           </Button>
         </Box>
       </form>

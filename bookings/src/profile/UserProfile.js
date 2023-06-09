@@ -36,12 +36,14 @@ const UserProfile = () => {
   const handleDelete = (id) => {
     deleteBooking(id)
       .then(() => {
-        const updatedBookings = bookings.filter((booking) => booking._id !== id);
+        const updatedBookings = bookings.filter(
+          (booking) => booking._id !== id
+        );
         setBookings(updatedBookings);
       })
       .catch((err) => console.log(err));
   };
-  
+
   return (
     <Box width="100%" display="flex">
       <Fragment>
@@ -52,12 +54,15 @@ const UserProfile = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            p={3}
-          >
+            p={3}>
             <img
               src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
               alt="Profile"
-              style={{ width: "10rem", textAlign: "center", marginLeft: "1rem" }}
+              style={{
+                width: "10rem",
+                textAlign: "center",
+                marginLeft: "1rem",
+              }}
             />
             <Typography
               variant="h5"
@@ -67,9 +72,8 @@ const UserProfile = () => {
               marginY={2}
               bgcolor="#f3f3f3"
               padding={1}
-              borderRadius={6}
-            >
-              Name: {user.name}
+              borderRadius={6}>
+              Nom: {user.name}
             </Typography>
             <Typography
               variant="h5"
@@ -79,8 +83,7 @@ const UserProfile = () => {
               marginY={2}
               bgcolor="#f3f3f3"
               padding={1}
-              borderRadius={6}
-            >
+              borderRadius={6}>
               Email: {user.email}
             </Typography>
           </Box>
@@ -91,11 +94,14 @@ const UserProfile = () => {
               variant="h3"
               fontFamily="verdana"
               textAlign="center"
-              padding={2}
-            >
-              Bookings
+              padding={2}>
+              Mes réservations
             </Typography>
-            <Box margin="auto" display="flex" flexDirection="column" width="80%">
+            <Box
+              margin="auto"
+              display="flex"
+              flexDirection="column"
+              width="80%">
               <List>
                 {bookings.map((booking, index) => (
                   <React.Fragment key={booking._id}>
@@ -106,28 +112,23 @@ const UserProfile = () => {
                           color: "white",
                           textAlign: "center",
                           margin: 1,
-                        }}
-                      >
+                        }}>
                         <ListItemText
-                          sx={{ margin: 1, width: "auto", textAlign: "left" }}
-                        >
+                          sx={{ margin: 1, width: "auto", textAlign: "left" }}>
                           <LocalPlayIcon style={{ marginRight: "0.5rem" }} />
-                          Movie: {booking.movie.title}
+                          Film: {booking.movie.title}
                         </ListItemText>
                         <ListItemText
-                          sx={{ margin: 1, width: "auto", textAlign: "left" }}
-                        >
-                          Seat: {booking.seatNumber}
+                          sx={{ margin: 1, width: "auto", textAlign: "left" }}>
+                          Place: {booking.seatNumber}
                         </ListItemText>
                         <ListItemText
-                          sx={{ margin: 1, width: "auto", textAlign: "left" }}
-                        >
-                          Date: {new Date(booking.date).toDateString()}
+                          sx={{ margin: 1, width: "auto", textAlign: "left" }}>
+                          Date: {new Date(booking.date).toLocaleDateString("fr-FR")}
                         </ListItemText>
                         <IconButton
                           onClick={() => handleDelete(booking._id)}
-                          color="error"
-                        >
+                          color="error">
                           <DeleteForeverIcon />
                         </IconButton>
                       </ListItem>

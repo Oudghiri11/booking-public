@@ -51,9 +51,12 @@ const AdminProfile = () => {
             justifyContent="center"
             alignItems={"center"}
             width={"30%"}
-            padding={3}>
-            <AccountCircleIcon
-              sx={{ fontSize: "10rem", textAlign: "center", ml: 3 }}
+            padding={3}
+          >
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQEUiVmeK0SIKz4WFwLjDnK-BrHaX3STvwyA&usqp=CAU"
+              alt="Admin Icon"
+              style={{ width: "8rem" }}
             />
             <Typography
               mt={1}
@@ -61,7 +64,8 @@ const AdminProfile = () => {
               width={"auto"}
               textAlign={"center"}
               border={"1px solid #ccc"}
-              borderRadius={6}>
+              borderRadius={6}
+            >
               Email: {admin.email}
             </Typography>
           </Box>
@@ -72,27 +76,31 @@ const AdminProfile = () => {
               variant="h3"
               fontFamily={"verdana"}
               textAlign="center"
-              padding={2}>
-              All Movies
+              padding={2}
+            >
+              Tous les films à l'affiche
             </Typography>
             <Box
               margin={"auto"}
               display="flex"
               flexDirection={"column"}
-              width="80%">
+              width="80%"
+            >
               <List>
                 {movies.map((movie, index) => (
                   <ListItem
                     key={movie.id}
                     sx={{
-                      bgcolor: "#00d386",
+                      bgcolor: "#2b2d49",
                       color: "white",
                       textAlign: "center",
                       margin: 1,
-                    }}>
+                    }}
+                  >
                     <ListItemText
-                      sx={{ margin: 1, width: "auto", textAlign: "left" }}>
-                      Movie: {movie.title}
+                      sx={{ margin: 1, width: "auto", textAlign: "left" }}
+                    >
+                      Film {movie.title}
                     </ListItemText>
                     <IconButton
                       color="inherit"

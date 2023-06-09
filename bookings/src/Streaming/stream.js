@@ -10,15 +10,14 @@ import "slick-carousel/slick/slick-theme.css";
 const Stream = () => {
   const API_BASE_URL = "https://api.themoviedb.org/3";
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
-  const API_KEY = "5e441fb1f18cc51011e1df183cb5ade6"; // Your API key
+  const API_KEY = "5e441fb1f18cc51011e1df183cb5ade6"; // Votre clé d'API
   const [searchKey, setSearchKey] = useState("");
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [showTrailer, setShowTrailer] = useState(false);
   const [genres, setGenres] = useState([
-    { id: 99, name: "Currently on Cinema" },
     { id: 28, name: "Action" },
-    { id: 12, name: "Adventure" },
+    { id: 12, name: "Aventure" },
     { id: 80, name: "Crime" },
     { id: 10749, name: "Romance" },
   ]);
@@ -30,6 +29,7 @@ const Stream = () => {
         params: {
           api_key: API_KEY,
           query: searchKey,
+          language: "fr-FR",
         },
       });
 
@@ -40,7 +40,7 @@ const Stream = () => {
       setSelectedMovie({ ...movieData, videos: movieVideos });
       setMovies(response.data.results);
     } catch (error) {
-      console.log("Error fetching movies:", error);
+      console.log("Erreur lors de la récupération des films :", error);
     }
   };
 
@@ -48,6 +48,7 @@ const Stream = () => {
     const { data } = await axios.get(`${API_BASE_URL}/movie/${id}`, {
       params: {
         api_key: API_KEY,
+        language: "fr-FR",
       },
     });
     return data;
@@ -68,11 +69,12 @@ const Stream = () => {
         params: {
           api_key: API_KEY,
           with_genres: genreId,
+          language: "fr-FR",
         },
       });
       return response.data.results;
     } catch (error) {
-      console.log(`Error fetching ${genreId} movies:`, error);
+      console.log(`Erreur lors de la récupération des films ${genreId} :`, error);
     }
   };
 
@@ -80,7 +82,7 @@ const Stream = () => {
     const data = await fetchMovie(movie.id);
     const videos = await fetchVideos(movie.id);
     setSelectedMovie({ ...data, videos });
-    setShowTrailer(false); // Reset showTrailer state when a new movie is selected
+    setShowTrailer(false); // Réinitialise l'état showTrailer lorsqu'un nouveau film est sélectionné
   };
 
   useEffect(() => {
@@ -137,9 +139,9 @@ const Stream = () => {
               type="text"
               value={searchKey}
               onChange={(e) => setSearchKey(e.target.value)}
-              placeholder="Search..."
+              placeholder="Rechercher..."
             />
-            <button type="submit">Search</button>
+            <button type="submit">Rechercher</button>
           </form>
         </div>
       </header>
@@ -149,13 +151,14 @@ const Stream = () => {
           backgroundImage: selectedMovie.backdrop_path
             ? `url(${IMAGE_BASE_URL}${selectedMovie.backdrop_path})`
             : "none",
-        }}>
+        }}
+      >
         {selectedMovie && (
           <div className="hero-content max-center">
             {!showTrailer && (
               <>
                 <button className="button" onClick={handleTrailerClick}>
-                  Watch Trailer
+                  Regarder la bande-annonce
                 </button>
                 <h1 className="hero-title">{selectedMovie.title}</h1>
                 {selectedMovie.overview && (
@@ -164,9 +167,9 @@ const Stream = () => {
               </>
             )}
             {showTrailer &&
-            selectedMovie.videos &&
-            selectedMovie.videos.length > 0 &&
-            selectedMovie.videos[0].key ? (
+              selectedMovie.videos &&
+              selectedMovie.videos.length > 0 &&
+              selectedMovie.videos[0].key ? (
               <Youtube videoId={selectedMovie.videos[0].key} />
             ) : null}
           </div>
@@ -175,7 +178,7 @@ const Stream = () => {
       <div className="slider-container max-center">
         {genres.map((genre) => (
           <React.Fragment key={genre.genreId}>
-            <h2 className="title">{genre.genreName} Movies</h2>
+            <h2 className="title">Films {genre.genreName}</h2>
             {renderMovies(genre.movies)}
           </React.Fragment>
         ))}
