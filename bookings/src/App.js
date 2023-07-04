@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Admin from "./components/Auth/Admin";
 import Auth from "./components/Auth/Auth";
 import Booking from "./components/Bookings/Booking";
@@ -17,8 +17,8 @@ function App() {
   const dispatch = useDispatch();
   const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
   const isUserLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  console.log("isAdminLoggedIn", isAdminLoggedIn);
-  console.log("isUserLoggedIn", isUserLoggedIn);
+  const location = useLocation();
+
   useEffect(() => {
     if (localStorage.getItem("userId")) {
       dispatch(userActions.login());
@@ -26,9 +26,12 @@ function App() {
       dispatch(adminActions.login());
     }
   }, [dispatch]);
+
+  const shouldDisplayHeader = !location.pathname.includes("/stream");
+
   return (
     <div>
-      <Header />
+      {shouldDisplayHeader && <Header />}
       <section>
         <Routes>
           <Route path="/" element={<HomePage />} />

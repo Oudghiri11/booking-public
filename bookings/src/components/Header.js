@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Autocomplete, Box, IconButton, Tab, Tabs, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Autocomplete,
+  Box,
+  IconButton,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@mui/material";
 import MovieIcon from "@mui/icons-material/Movie";
 import { TextField } from "@mui/material";
 import { getAllMovies } from "../api-helpers.js/api-helpers";
@@ -40,7 +48,11 @@ const Header = () => {
             <img
               src="https://static.thenounproject.com/png/4068872-200.png"
               alt="Custom Icon"
-              style={{ width: "40px", height: "40px", filter: "invert(10000%)" }}
+              style={{
+                width: "40px",
+                height: "40px",
+                filter: "invert(10000%)",
+              }}
             />
           </IconButton>
         </Box>
@@ -70,8 +82,7 @@ const Header = () => {
             textColor="inherit"
             indicatorColor="secondary"
             value={value}
-            onChange={(e, val) => setValue(val)}
-          >
+            onChange={(e, val) => setValue(val)}>
             <Tab component={Link} to="/movies" label="Cinéma" />
             {!isAdminLoggedIn && !isUserLoggedIn && (
               <>
@@ -81,16 +92,31 @@ const Header = () => {
             )}
             {isUserLoggedIn && (
               <>
-                <Tab component={Link} to="/stream" label="Streaming" />
+                <Tab
+                  component={Link}
+                  to="/stream"
+                  target="_blank"
+                  label="Streaming"
+                />
                 <Tab component={Link} to="/user" label="Profil" />
-                <Tab onClick={() => logout(false)} component={Link} to="/" label="Déconnexion" />
+                <Tab
+                  onClick={() => logout(false)}
+                  component={Link}
+                  to="/"
+                  label="Déconnexion"
+                />
               </>
             )}
             {isAdminLoggedIn && (
               <>
                 <Tab component={Link} to="/add" label="Ajouter un film" />
                 <Tab component={Link} to="/user-admin" label="Profil" />
-                <Tab onClick={() => logout(true)} component={Link} to="/" label="Déconnexion" />
+                <Tab
+                  onClick={() => logout(true)}
+                  component={Link}
+                  to="/"
+                  label="Déconnexion"
+                />
               </>
             )}
           </Tabs>
