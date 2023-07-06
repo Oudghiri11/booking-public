@@ -6,8 +6,8 @@ import { adminActions } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate(); //pour rediriger l'admin aprés l'authentiffication
+  const dispatch = useDispatch();// pour mettre à jour l'etat de la fonction
   const onResReceived = (data) => {
     console.log(data);
     dispatch(adminActions.login());

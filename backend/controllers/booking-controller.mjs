@@ -83,7 +83,7 @@ export const deleteBooking = async (req, res, next) => {
     return console.log(err);
   }
   if (!booking) {
-    return res.status(500).json({ message: "Unable to Delete" });
+    return res.status(500).json({ message: "Unable to Delete the booking" });
   }
-  return res.status(200).json({ message: "Successfully Deleted" });
+  return res.status(200).json({ message: "Successfully Deleted the booking" });
 };

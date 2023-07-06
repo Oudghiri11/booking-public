@@ -11,7 +11,7 @@ export const addMovie = async (req, res, next) => {
 
   let adminId;
 
-  // verify token
+  // verifie le Token 
   jwt.verify(extractedToken, process.env.SECRET_KEY, (err, decrypted) => {
     if (err) {
       return res.status(400).json({ message: `${err.message}` });
@@ -21,7 +21,7 @@ export const addMovie = async (req, res, next) => {
     }
   });
 
-  // create new movie
+  // Pour créer un nouveau film
   const {
     title,
     description,
@@ -65,7 +65,7 @@ export const addMovie = async (req, res, next) => {
     const adminUser = await Admin.findById(adminId);
     adminUser.addedMovies.push(movie);
     await adminUser.save({ session });
-
+// valider 
     await session.commitTransaction();
     session.endSession();
   } catch (err) {

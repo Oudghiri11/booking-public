@@ -47,7 +47,7 @@ const AuthForm = ({ onSubmit, isAdmin }) => {
           width={400}
           margin="auto"
           alignContent={"center"}>
-          {!isAdmin && isSignup && (
+          {!isAdmin && isSignup && ( //si il est pas admin isSignup est true 
             <>
               {" "}
               <FormLabel sx={labelStyle}>Nom</FormLabel>

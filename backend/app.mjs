@@ -12,6 +12,7 @@ dotenv.config();
 const app = express();
 
 // middlewares
+//let any URL MAKE a request from all domains
 app.use(cors());
 app.use(express.json());
 app.use("/user", userRouter);

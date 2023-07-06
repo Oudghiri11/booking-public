@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Stream = () => {
   const API_BASE_URL = "https://api.themoviedb.org/3";
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
-  const API_KEY = "5e441fb1f18cc51011e1df183cb5ade6"; // Votre clé d'API
+  const API_KEY = "5e441fb1f18cc51011e1df183cb5ade6"; 
   const [searchKey, setSearchKey] = useState("");
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState({});
@@ -112,7 +112,7 @@ const Stream = () => {
     }
 
     return (
-      <Slider slidesToShow={5} slidesToScroll={1}>
+      <Slider slidesToShow={6} slidesToScroll={1}>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} selectMovie={selectMovie} />
         ))}

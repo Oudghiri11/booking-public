@@ -28,7 +28,7 @@ export const singup = async (req, res, next) => {
     return res.status(422).json({ message: "Invalid Inputs" });
   }
   const hashedPassword = bcrypt.hashSync(password);
-  let user;
+  let user; 
   try {
     user = new User({ name, email, password: hashedPassword });
     user = await user.save();
