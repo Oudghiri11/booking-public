@@ -78,7 +78,7 @@ const Booking = () => {
                   <FormLabel>Numéro de place</FormLabel>
                   <TextField
                     name="seatNumber"
-                    value={inpts.seatNumuber}
+                    value={inputs.seatNumber}
                     onChange={handleChange}
                     type="number"
                     margin="normal"
